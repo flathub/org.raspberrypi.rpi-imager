@@ -25,7 +25,4 @@ modules:
         path: org.raspberrypi.rpi-imager.metainfo.xml
     buildsystem: cmake-ninja
     post-install:
-      - 'mkdir -p $FLATPAK_DEST/share/icons/hicolor/128x128/apps'
-      - 'mv $FLATPAK_DEST/share/pixmaps/rpi-imager.png $FLATPAK_DEST/share/icons/hicolor/128x128/apps'
-      - 'rmdir $FLATPAK_DEST/share/pixmaps'
       - 'install -D -m 644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml'
