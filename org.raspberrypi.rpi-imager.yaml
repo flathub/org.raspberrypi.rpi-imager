@@ -17,9 +17,10 @@ finish-args:
 modules:
   - name: rpi-imager
     sources:
-      - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/v1.2.tar.gz
-        sha256: 69c67d6a92629d6c701c0ffe29b3033032e9b808fe9948c8abcc83409fec93d8
+      - type: git
+        url: https://github.com/raspberrypi/rpi-imager.git
+        tag: v1.3
+        commit: 7506d5b35a5dc33fa29814f3775f05d678f56ecc
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
     buildsystem: cmake-ninja
