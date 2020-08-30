@@ -9,7 +9,7 @@ finish-args:
   - --device=dri
   - --share=ipc
   - --share=network
-  - --socket=fallback-x11
+  - --socket=x11
   - --filesystem=xdg-download
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
