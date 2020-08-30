@@ -13,7 +13,7 @@ finish-args:
   - --filesystem=xdg-download
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.freedesktop.UDisks2
+  - --system-talk-name=org.freedesktop.UDisks2
 modules:
   - name: rpi-imager
     sources:
