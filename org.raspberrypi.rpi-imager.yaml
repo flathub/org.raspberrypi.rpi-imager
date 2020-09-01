@@ -6,7 +6,7 @@ command: rpi-imager
 rename-desktop-file: rpi-imager.desktop
 rename-icon: rpi-imager
 finish-args:
-  - --device=dri
+  - --device=all
   - --share=ipc
   - --share=network
   - --socket=x11
