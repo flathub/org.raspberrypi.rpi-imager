@@ -1,6 +1,6 @@
 app-id: org.raspberrypi.rpi-imager
 runtime: org.kde.Platform
-runtime-version: '5.14'
+runtime-version: '5.15'
 sdk: org.kde.Sdk
 command: rpi-imager
 rename-desktop-file: rpi-imager.desktop
@@ -19,8 +19,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/raspberrypi/rpi-imager.git
-        tag: v1.4
-        commit: 385ee6d742b71f2b50840bb68119065c1d86cc47
+        tag: v1.5
+        commit: d129d12b004f9097d8fd930bb27f7f6b9b3d1d8b
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
     buildsystem: cmake-ninja
