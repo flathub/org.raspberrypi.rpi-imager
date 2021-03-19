@@ -24,7 +24,7 @@ modules:
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
-        path: rpi-no-telemetry.patch
+        path: rpi-no-telemetry-by-default.patch
     buildsystem: cmake-ninja
     post-install:
       - rm -f $FLATPAK_DEST/share/metainfo/*.metainfo.xml
