@@ -16,6 +16,10 @@ finish-args:
   - --system-talk-name=org.freedesktop.UDisks2
 modules:
   - name: rpi-imager
+    buildsystem: cmake-ninja
+    post-install:
+      - rm -f $FLATPAK_DEST/share/metainfo/*.metainfo.xml
+      - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
     sources:
       - type: git
         url: https://github.com/raspberrypi/rpi-imager.git
@@ -24,8 +28,4 @@ modules:
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
-        path: rpi-no-telemetry.patch
-    buildsystem: cmake-ninja
-    post-install:
-      - rm -f $FLATPAK_DEST/share/metainfo/*.metainfo.xml
-      - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
+        path: rpi-no-telemetry-by-default.patch
