@@ -29,3 +29,5 @@ modules:
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
         path: rpi-no-telemetry-by-default.patch
+      - type: patch
+        path: fix-use-custom-option.patch
