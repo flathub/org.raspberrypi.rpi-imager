@@ -22,8 +22,8 @@ modules:
       - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.6.tar.gz
-        sha256: 811f9c261f82f75eefb9129570c47ff6653c1e9af08d9ed0b877261b4d184685
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/1.6.1.tar.gz
+        sha256: 166d4926ab5a21f9a83096eff67a9a72f1a7f55702a36cb448cccf5f3b075509
         x-checker-data:
           type: anitya
           project-id: 185260
@@ -33,5 +33,3 @@ modules:
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
         path: rpi-no-telemetry-by-default.patch
-      - type: patch
-        path: fix-use-custom-option.patch
