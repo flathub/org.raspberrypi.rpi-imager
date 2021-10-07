@@ -21,10 +21,14 @@ modules:
       - rm -f $FLATPAK_DEST/share/metainfo/*.metainfo.xml
       - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
     sources:
-      - type: git
-        url: https://github.com/raspberrypi/rpi-imager.git
-        tag: v1.6
-        commit: 906ceabaecf060e0720dd2c71e140f8347101b42
+      - type: archive
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.6.tar.gz
+        sha256: 811f9c261f82f75eefb9129570c47ff6653c1e9af08d9ed0b877261b4d184685
+        x-checker-data:
+          type: anitya
+          project-id: 185260
+          stable-only: true
+          url-template: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v${version}.tar.gz
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
