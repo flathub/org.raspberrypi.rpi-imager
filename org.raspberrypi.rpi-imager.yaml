@@ -25,6 +25,11 @@ modules:
         url: https://github.com/raspberrypi/rpi-imager.git
         tag: v1.6
         commit: 906ceabaecf060e0720dd2c71e140f8347101b42
+        x-checker-data:
+          type: anitya
+          project-id: 185260
+          stable-only: true
+          url-template: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v${version}.tar.gz
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
       - type: patch
