@@ -1,6 +1,6 @@
 app-id: org.raspberrypi.rpi-imager
 runtime: org.kde.Platform
-runtime-version: '5.15'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
 command: rpi-imager
 rename-desktop-file: rpi-imager.desktop
