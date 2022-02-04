@@ -11,7 +11,6 @@ finish-args:
   - --share=network
   - --socket=x11
   - --filesystem=xdg-download
-  - --filesystem=/mnt
   - --filesystem=/media
   - --filesystem=/run/media
   - --talk-name=org.a11y.*
