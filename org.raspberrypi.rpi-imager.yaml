@@ -11,6 +11,8 @@ finish-args:
   - --share=network
   - --socket=x11
   - --filesystem=xdg-download
+  - --filesystem=/media
+  - --filesystem=/run/media
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
   - --system-talk-name=org.freedesktop.UDisks2
@@ -22,8 +24,8 @@ modules:
       - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.6.2.tar.gz
-        sha256: 32f7fcd732ed8b707e862f51311c846b13a9dfb805cc6d901c601e2e5c2ec2d7
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.7.1.tar.gz
+        sha256: 57c4b1d53a3c5f84fe9a653c07d9c5ea2d5941356c536d6d434d1ff6133b587d
         x-checker-data:
           type: anitya
           project-id: 185260
