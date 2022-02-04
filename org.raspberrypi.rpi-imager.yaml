@@ -11,6 +11,9 @@ finish-args:
   - --share=network
   - --socket=x11
   - --filesystem=xdg-download
+  - --filesystem=/mnt
+  - --filesystem=/media
+  - --filesystem=/run/media
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
   - --system-talk-name=org.freedesktop.UDisks2
