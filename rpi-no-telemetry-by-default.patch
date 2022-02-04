@@ -1,13 +1,13 @@
 diff --git a/config.h b/config.h
-index 104b8c6..abbc0d9 100644
+index 75a4110..08253da 100644
 --- a/config.h
 +++ b/config.h
 @@ -15,7 +15,7 @@
- 
+
  /* Phone home the name of images downloaded for image popularity ranking */
- #define TELEMETRY_URL                     "https://rpi-imager-stats.raspberrypi.org/downloads"
+ #define TELEMETRY_URL                     "https://rpi-imager-stats.raspberrypi.com/downloads"
 -#define TELEMETRY_ENABLED_DEFAULT         true
 +#define TELEMETRY_ENABLED_DEFAULT         false
- 
+
  /* Hash algorithm for verifying (uncompressed image) checksum */
  #define OSLIST_HASH_ALGORITHM             QCryptographicHash::Sha256
