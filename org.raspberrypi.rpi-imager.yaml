@@ -18,6 +18,9 @@ finish-args:
   - --system-talk-name=org.freedesktop.UDisks2
 modules:
   - name: rpi-imager
+    config-opts:
+      - -DENABLE_CHECK_VERSION:BOOL=OFF
+      - -DENABLE_TELEMETRY:BOOL=OFF
     buildsystem: cmake-ninja
     builddir: true
     subdir: src
