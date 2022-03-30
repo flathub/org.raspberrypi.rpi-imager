@@ -26,7 +26,7 @@ modules:
     subdir: src
     post-install:
       - rm -f "${FLATPAK_DEST}/share/metainfo/*.metainfo.xml"
-      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo ../${FLATPAK_ID}.metainfo.xml"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo ../../${FLATPAK_ID}.metainfo.xml"
     sources:
       - type: archive
         url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.7.2.tar.gz
