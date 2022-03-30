@@ -1,6 +1,6 @@
 app-id: org.raspberrypi.rpi-imager
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: 5.15-21.08
 sdk: org.kde.Sdk
 command: rpi-imager
 rename-desktop-file: rpi-imager.desktop
@@ -24,8 +24,8 @@ modules:
       - install -Dm644 -t $FLATPAK_DEST/share/metainfo $FLATPAK_ID.metainfo.xml
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.7.1.tar.gz
-        sha256: 57c4b1d53a3c5f84fe9a653c07d9c5ea2d5941356c536d6d434d1ff6133b587d
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.7.2.tar.gz
+        sha256: babdcda0a38c5dc3893eef3d2d7138d6d23ba7e306f0f840b6970c579490a57a
         x-checker-data:
           type: anitya
           project-id: 185260
