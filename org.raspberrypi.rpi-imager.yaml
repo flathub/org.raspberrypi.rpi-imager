@@ -35,5 +35,3 @@ modules:
           url-template: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v${version}.tar.gz
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
-      - type: patch
-        path: rpi-no-telemetry-by-default.patch
