@@ -9,7 +9,8 @@ finish-args:
   - --device=all
   - --share=ipc
   - --share=network
-  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
   - --socket=pulseaudio
   - --filesystem=xdg-download
   - --filesystem=/media
