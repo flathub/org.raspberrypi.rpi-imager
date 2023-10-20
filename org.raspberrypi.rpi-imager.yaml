@@ -30,8 +30,8 @@ modules:
       - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.7.5.tar.gz
-        sha256: 876c4e22483cb28bba975ad000589963e4e952e541f5a985fa68e44490e235a0
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.8.1.tar.gz
+        sha256: bc044cd9a62130f5ced8c384667cc171b96adc97de27e75f7466f8f0d731fd77
         x-checker-data:
           type: anitya
           project-id: 185260
