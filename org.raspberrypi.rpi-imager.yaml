@@ -31,8 +31,8 @@ modules:
       - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.8.3.tar.gz
-        sha256: dd603bff1c76c8a9d7156232397c8428a781b2ce25bb6e3cf9c63e7820f794c4
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.8.3_rpios.tar.gz
+        sha256: ebb9764485766e049d50887c2bee4c854335a5b7db29163a135bfccc178e7cde
         x-checker-data:
           type: anitya
           project-id: 185260
