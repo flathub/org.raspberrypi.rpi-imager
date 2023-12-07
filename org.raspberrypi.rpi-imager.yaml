@@ -34,9 +34,11 @@ modules:
         url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.8.3.tar.gz
         sha256: dd603bff1c76c8a9d7156232397c8428a781b2ce25bb6e3cf9c63e7820f794c4
         x-checker-data:
-          type: anitya
-          project-id: 185260
-          stable-only: true
-          url-template: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v${version}.tar.gz
+          type: json
+          url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
+          url-query: |
+            "https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v" + $version + ".tar.gz"
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
