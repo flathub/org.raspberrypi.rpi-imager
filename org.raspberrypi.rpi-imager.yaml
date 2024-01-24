@@ -3,7 +3,6 @@ runtime: org.kde.Platform
 runtime-version: 5.15-23.08
 sdk: org.kde.Sdk
 command: rpi-imager
-rename-desktop-file: rpi-imager.desktop
 rename-icon: rpi-imager
 finish-args:
   - --device=all
