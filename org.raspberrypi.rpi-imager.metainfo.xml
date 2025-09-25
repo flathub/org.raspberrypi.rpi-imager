@@ -57,9 +57,29 @@
   </provides>
   <developer_name>RPi Imager Developers</developer_name>
   <releases>
-    <release version="1.9.0" date="2024-09-11">
-      <description></description>
+    <release version="1.9.6" date="2025-07-21">
+      <description>
+        <ul>
+          <li>README: Fix script name typo by @ahresse in #1114</li>
+          <li>Updated Russian translations by @nafanz in #1118</li>
+          <li>Italian language update by @bovirus in #1112</li>
+          <li>1.9.6: Fix roll-up by @tdewey-rpi in #1113</li>
+          <li>Update ssh validation message to match regex by @tdewey-rpi in #1121</li>
+          <li>Update error in README.md by @itsMattShull in #1119</li>
+          <li>lupdate: Update translation reference strings by @tdewey-rpi in #1127</li>
+          <li>README fix by @lurch in #1122</li>
+          <li>Update second bad SSH key helper string by @tdewey-rpi in #1128</li>
+          <li>Added Russian translation for new lines by @nafanz in #1120</li>
+          <li>Update Simplified Chinese translation by @ykla in #1102</li>
+          <li>WiFi country code validation by @tdewey-rpi in #1129</li>
+          <li>Italian language update by @bovirus in #1124</li>
+          <li>Update French translation by @martignoni in #1126</li>
+          <li>Update Bengali and Irish translations: remove outdated error messages… by @tdewey-rpi in #1130</li>
+          <li>meta: v1.9.6 by @tdewey-rpi in #1131</li>
+        </ul>
+      </description>
     </release>
+    <release version="1.9.0" date="2024-09-11"/>
     <release version="1.8.5" date="2024-01-21"/>
     <release version="1.8.4" date="2023-12-22"/>
     <release version="1.8.3" date="2023-11-17"/>
