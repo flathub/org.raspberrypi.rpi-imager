@@ -57,8 +57,11 @@
   </provides>
   <developer_name>RPi Imager Developers</developer_name>
   <releases>
-    <release version="1.9.0" date="2024-09-11">
+    <release version="1.9.6" date="2025-07-21">
       <description></description>
+    </release>
+    <release version="1.9.0" date="2024-09-11">
+      <description/>
     </release>
     <release version="1.8.5" date="2024-01-21"/>
     <release version="1.8.4" date="2023-12-22"/>
