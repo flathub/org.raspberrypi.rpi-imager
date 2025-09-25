@@ -6,7 +6,6 @@ command: rpi-imager
 rename-icon: rpi-imager
 finish-args:
   - --device=all
-  - --device=dri
   - --share=ipc
   - --share=network
   - --socket=fallback-x11
