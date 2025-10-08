@@ -1,5 +1,5 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index f9e020ce..7a7d9020 100644
+index f9e020ce..6800f766 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -40,27 +40,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -314,6 +314,34 @@ index f9e020ce..7a7d9020 100644
  
  include_directories(BEFORE .)
  
+@@ -661,6 +437,13 @@ if(${QT}WinExtras_FOUND)
+     set(EXTRALIBS ${EXTRALIBS} ${QT}::WinExtras)
+ endif()
+ 
++if (WIN32)
++    # Adding WIN32 prevents a console window being opened on Windows
++    add_executable(${PROJECT_NAME} WIN32 ${SOURCES} ${HEADERS} ${DEPENDENCIES})
++else()
++    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${DEPENDENCIES})
++endif()
++
+ # Find all translation files automatically
+ file(GLOB TRANSLATIONS CONFIGURE_DEPENDS "i18n/*.ts")
+ 
+@@ -672,13 +455,6 @@ set(SOURCES ${SOURCES} ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc ${QM_FILES})
+ # Create an rpi-imager_lupdate target
+ qt_add_lupdate(TS_FILES ${TRANSLATIONS} SOURCE_TARGETS ${PROJECT_NAME} OPTIONS -no-obsolete -locations none)
+ 
+-if (WIN32)
+-    # Adding WIN32 prevents a console window being opened on Windows
+-    add_executable(${PROJECT_NAME} WIN32 ${SOURCES} ${HEADERS} ${DEPENDENCIES})
+-else()
+-    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${DEPENDENCIES})
+-endif()
+-
+ set_property(TARGET ${PROJECT_NAME} PROPERTY AUTOMOC ON)
+ set_property(TARGET ${PROJECT_NAME} PROPERTY AUTORCC ON)
+ set_property(TARGET ${PROJECT_NAME} PROPERTY AUTOUIC ON)
 @@ -746,286 +522,24 @@ qt_add_qml_module(${PROJECT_NAME}
      NO_PLUGIN
  )
@@ -380,13 +408,8 @@ index f9e020ce..7a7d9020 100644
 -    find_program(WINDEPLOYQT "windeployqt.exe" PATHS "${Qt6_ROOT}/bin")
 -    if (NOT WINDEPLOYQT)
 -        message(FATAL_ERROR "Unable to locate windeployqt.exe")
-+# UNIX, Linux systems
-+if (NOT CMAKE_CROSSCOMPILING)
-+    find_program(LSBLK "lsblk")
-+    if (NOT LSBLK)
-+        message(FATAL_ERROR "Unable to locate lsblk (used for disk enumeration)")
-     endif()
- 
+-    endif()
+-
 -    file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/deploy")
 -
 -    add_custom_command(TARGET ${PROJECT_NAME}
@@ -439,10 +462,7 @@ index f9e020ce..7a7d9020 100644
 -            "${CMAKE_CURRENT_SOURCE_DIR}/windows/rpi-imager.nsi.in"
 -            "${CMAKE_CURRENT_BINARY_DIR}/rpi-imager.nsi"
 -            @ONLY)
-+    execute_process(COMMAND "${LSBLK}" "--json" OUTPUT_QUIET RESULT_VARIABLE ret)
-+    if (ret EQUAL "1")
-+        message(FATAL_ERROR "util-linux package too old. lsblk does not support --json (used for disk enumeration)")
-     endif()
+-    endif()
 -
 -    add_custom_command(TARGET ${PROJECT_NAME}
 -        POST_BUILD
@@ -531,8 +551,13 @@ index f9e020ce..7a7d9020 100644
 -    find_program(MACDEPLOYQT "macdeployqt" PATHS "${Qt6_ROOT}/bin")
 -    if (NOT MACDEPLOYQT)
 -        message(FATAL_ERROR "Unable to locate macdeployqt")
--    endif()
--
++# UNIX, Linux systems
++if (NOT CMAKE_CROSSCOMPILING)
++    find_program(LSBLK "lsblk")
++    if (NOT LSBLK)
++        message(FATAL_ERROR "Unable to locate lsblk (used for disk enumeration)")
+     endif()
+ 
 -    # Deploy Qt dependencies as part of the main build
 -    add_custom_command(TARGET ${PROJECT_NAME}
 -        POST_BUILD
@@ -598,7 +623,10 @@ index f9e020ce..7a7d9020 100644
 -        if (ret EQUAL "1")
 -            message(FATAL_ERROR "util-linux package too old. lsblk does not support --json (used for disk enumeration)")
 -        endif()
--    endif()
++    execute_process(COMMAND "${LSBLK}" "--json" OUTPUT_QUIET RESULT_VARIABLE ret)
++    if (ret EQUAL "1")
++        message(FATAL_ERROR "util-linux package too old. lsblk does not support --json (used for disk enumeration)")
+     endif()
 -
 -    install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../debian/rpi-imager.png" DESTINATION share/icons/hicolor/128x128/apps)
