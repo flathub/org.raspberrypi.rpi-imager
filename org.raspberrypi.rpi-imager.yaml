@@ -24,22 +24,23 @@ modules:
       - -DENABLE_TELEMETRY:BOOL=OFF
       - -DCMAKE_BUILD_TYPE=MinSizeRel
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-      - -DFETCHCONTENT_SOURCE_DIR_XZ=_deps/xz-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=_deps/zstd-src
-      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=_deps/nghttp2-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=_deps/zlib-src
-      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_XZ=../_deps/xz-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=../_deps/zstd-src
+      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=../_deps/nghttp2-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=../_deps/zlib-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=../_deps/libarchive-src
+      - -DBUILD_CLI_ONLY=OFF
     buildsystem: cmake-ninja
-    builddir: false
+    builddir: true
     subdir: src
     post-install:
       - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
-      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../${FLATPAK_ID}.metainfo.xml"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.9.6.tar.gz
-        sha256: dbaef70eaeeec7bab95adb677681ef3bdb63c5568b53915fde78276c04421ed3
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.0.tar.gz
+        sha256: f6e17abace087e280d5b8007c08de17029ebaa66ec0737add2519bf5f32d5f80
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -65,8 +66,8 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        tag: v1.66.0
-        commit: ac22e0efe3f82f43c1366961c89a50ee821cfba3
+        tag: v1.67.1
+        commit: 49908f992027821912b96a13898b665a35aa3a0a
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
@@ -81,6 +82,19 @@ modules:
         tag: v3.8.1
         commit: 9525f90ca4bd14c7b335e2f8c84a4607b0af6bdf
         dest: src/_deps/libarchive-src
+
+      - type: file
+        path: capital-cities.json
+        dest: src/
+
+      - type: file
+        path: tzdata2025b.tar.gz
+        dest: src/
+
+      - type: file
+        path: wireless-regdb.txt
+        dest: src/
+
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
 
