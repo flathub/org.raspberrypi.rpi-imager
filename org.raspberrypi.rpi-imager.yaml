@@ -23,18 +23,16 @@ modules:
       - -DENABLE_TELEMETRY:BOOL=OFF
       - -DCMAKE_BUILD_TYPE=MinSizeRel
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-      - -DFETCHCONTENT_SOURCE_DIR_XZ=../_deps/xz-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=../_deps/zstd-src
-      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=../_deps/nghttp2-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=../_deps/zlib-src
-      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=../_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_XZ=./_deps/xz-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=./_deps/zstd-src
+      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=./_deps/nghttp2-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=./_deps/zlib-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=./_deps/libarchive-src
       - -DBUILD_CLI_ONLY=OFF
     buildsystem: cmake-ninja
     builddir: false
     subdir: src
     post-install:
-      - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
-      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive

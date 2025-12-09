@@ -8,7 +8,7 @@ index fc749cbc..6f9f4f55 100644
  debian/tmp
 -debian/com.raspberrypi.rpi-imager.metainfo.xml
 +debian/org.raspberrypi.rpi-imager.metainfo.xml
- 
+
  # macOS
  .DS_Store
 diff --git a/debian/com.raspberrypi.rpi-imager-cli.desktop b/debian/org.raspberrypi.rpi-imager-cli.desktop
@@ -74,7 +74,7 @@ index fc80a4b8..6c04e18a 100644
 @@ -7,7 +7,7 @@
    <vendor>Raspberry Pi Ltd</vendor>
    <vendor_url>https://www.raspberrypi.com/</vendor_url>
- 
+
 -  <action id="com.raspberrypi.rpi-imager.run">
 +  <action id="org.raspberrypi.rpi-imager.run">
      <description>Run Raspberry Pi Imager</description>
@@ -82,7 +82,7 @@ index fc80a4b8..6c04e18a 100644
      <icon_name>rpi-imager</icon_name>
 @@ -21,4 +21,3 @@
    </action>
- 
+
  </policyconfig>
 -
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
@@ -91,7 +91,7 @@ index 4f50e8d2..730321a4 100644
 +++ b/src/CMakeLists.txt
 @@ -4,8 +4,8 @@ include(cmake/GeneratedResource.cmake)
  # Copyright (C) 2020-2025 Raspberry Pi Ltd
- 
+
  cmake_minimum_required(VERSION 3.22)
 -OPTION (ENABLE_CHECK_VERSION "Check for version updates" ON)
 -OPTION (ENABLE_TELEMETRY "Enable sending telemetry" ON)
@@ -99,19 +99,19 @@ index 4f50e8d2..730321a4 100644
 +OPTION (ENABLE_TELEMETRY "Enable sending telemetry" OFF)
  OPTION (BUILD_EMBEDDED "Build for Embedded Imager" OFF)
  OPTION (BUILD_CLI_ONLY "Build CLI-only version without GUI components" OFF)
- 
+
 @@ -327,7 +327,7 @@ option(GENERATE_TIMEZONES_FROM_IANA "Generate timezone list from latest IANA dat
- 
+
  if(GENERATE_TIMEZONES_FROM_IANA)
      set(TZDATA_VERSION "2025b") # Update this to get newer timezone data
 -    set(TZDATA_URL "https://data.iana.org/time-zones/releases/tzdata${TZDATA_VERSION}.tar.gz")
 +    set(TZDATA_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/tzdata${TZDATA_VERSION}.tar.gz")
- 
+
      # Reuse the helper to produce a generated qrc aliasing timezones.txt
      # Always create/update a placeholder for clean builds so rcc can parse generated qrc
 @@ -355,7 +355,7 @@ endif()
  option(GENERATE_COUNTRIES_FROM_REGDB "Generate countries list from latest wireless-regdb" ON)
- 
+
  if(GENERATE_COUNTRIES_FROM_REGDB)
 -    set(REGDB_URL "https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/db.txt")
 +    set(REGDB_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/wireless-regdb.txt")
@@ -120,7 +120,7 @@ index 4f50e8d2..730321a4 100644
      if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/countries.txt")
 @@ -379,7 +379,7 @@ endif()
  option(GENERATE_CAPITAL_CITIES "Generate capital cities list from REST Countries API" ON)
- 
+
  if(GENERATE_CAPITAL_CITIES)
 -    set(REST_COUNTRIES_URL "https://restcountries.com/v3.1/all?fields=name,capital,cca2,timezones")
 +    set(REST_COUNTRIES_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/capital-cities.json")
@@ -133,7 +133,7 @@ index 367b9180..50f7439a 100644
 +++ b/src/dependencies/curl.cmake
 @@ -1,148 +1,4 @@
  # Bundled libcurl
- 
+
  set(CURL_VERSION "8.15.0")
 -string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 -FetchContent_Declare(curl
@@ -292,24 +292,24 @@ index 4fd82850..6da6f591 100644
  configure_file(
 -    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml.in"
 -    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml"
-+    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml.in"
-+    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml"
++    "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager.metainfo.xml.in"
++    "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager.metainfo.xml"
      @ONLY)
- 
+
  install(TARGETS ${PROJECT_NAME} DESTINATION bin)
- 
+
  if(BUILD_CLI_ONLY)
      # CLI-only build: install CLI-specific desktop file (marked as NoDisplay)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
-+    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
++    install(FILES "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
      # Note: No icon or metainfo needed for CLI-only builds
  else()
      # GUI build: install full desktop integration
      install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/rpi-imager.png" DESTINATION share/icons/hicolor/128x128/apps)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
-+    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
-+    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
++    install(FILES "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
++    install(FILES "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
  endif()
- 
- 
+
+
