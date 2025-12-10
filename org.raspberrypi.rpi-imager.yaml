@@ -37,8 +37,8 @@ modules:
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.9.6.tar.gz
-        sha256: dbaef70eaeeec7bab95adb677681ef3bdb63c5568b53915fde78276c04421ed3
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.2.tar.gz
+        sha256: cc3b784705ca0638eff8b9dc976eb9a02892bf5076d95b4af9f7f355a17326f6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
