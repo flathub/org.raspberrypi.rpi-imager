@@ -8,8 +8,8 @@ finish-args:
   - --device=all
   - --share=ipc
   - --share=network
-  - --socket=fallback-x11
   - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --filesystem=/media
   - --filesystem=/run/media
@@ -21,7 +21,7 @@ modules:
     config-opts:
       - -DENABLE_CHECK_VERSION:BOOL=OFF
       - -DENABLE_TELEMETRY:BOOL=OFF
-      - -DCMAKE_BUILD_TYPE=MinSizeRel
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
       - -DFETCHCONTENT_SOURCE_DIR_XZ=./_deps/xz-src
       - -DFETCHCONTENT_SOURCE_DIR_ZSTD=./_deps/zstd-src
@@ -36,8 +36,8 @@ modules:
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.0.tar.gz
-        sha256: f6e17abace087e280d5b8007c08de17029ebaa66ec0737add2519bf5f32d5f80
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.2.tar.gz
+        sha256: cc3b784705ca0638eff8b9dc976eb9a02892bf5076d95b4af9f7f355a17326f6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest

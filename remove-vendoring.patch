@@ -16,17 +16,6 @@ similarity index 85%
 rename from debian/com.raspberrypi.rpi-imager-cli.desktop
 rename to debian/org.raspberrypi.rpi-imager-cli.desktop
 index 9475e2fd..cb3f1a5e 100644
---- a/debian/com.raspberrypi.rpi-imager-cli.desktop
-+++ b/debian/org.raspberrypi.rpi-imager-cli.desktop
-@@ -3,7 +3,7 @@ Type=Application
- Name=Raspberry Pi Imager (CLI)
- Comment=Raspberry Pi Imager command-line interface
- Exec=rpi-imager-cli
--Icon=com.raspberrypi.rpi-imager
-+Icon=org.raspberrypi.rpi-imager
- Categories=System;
- Terminal=true
- NoDisplay=true
 diff --git a/debian/com.raspberrypi.rpi-imager-embedded.desktop b/debian/org.raspberrypi.rpi-imager-embedded.desktop
 similarity index 100%
 rename from debian/com.raspberrypi.rpi-imager-embedded.desktop
@@ -283,10 +272,10 @@ index 367b9180..50f7439a 100644
 +find_package(CURL 8.15.0 REQUIRED)
 \ No newline at end of file
 diff --git a/src/linux/PlatformPackaging.cmake b/src/linux/PlatformPackaging.cmake
-index 4fd82850..6da6f591 100644
+index a90de134..00a7a928 100644
 --- a/src/linux/PlatformPackaging.cmake
 +++ b/src/linux/PlatformPackaging.cmake
-@@ -15,21 +15,21 @@ endif()
+@@ -15,8 +15,8 @@ endif()
  # Generate metainfo.xml with current version
  # Output to debian/ directory for dpkg-buildpackage
  configure_file(
@@ -297,15 +286,15 @@ index 4fd82850..6da6f591 100644
      @ONLY)
 
  install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-
- if(BUILD_CLI_ONLY)
+@@ -25,12 +25,12 @@ if(BUILD_CLI_ONLY)
      # CLI-only build: install CLI-specific desktop file (marked as NoDisplay)
+     # Icon is still required for AppImage tooling (linuxdeploy) even though NoDisplay=true
+     install(FILES "${CMAKE_CURRENT_LIST_DIR}/icon/rpi-imager.svg" DESTINATION share/icons/hicolor/scalable/apps)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
 +    install(FILES "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
-     # Note: No icon or metainfo needed for CLI-only builds
  else()
      # GUI build: install full desktop integration
-     install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/rpi-imager.png" DESTINATION share/icons/hicolor/128x128/apps)
+     install(FILES "${CMAKE_CURRENT_LIST_DIR}/icon/rpi-imager.svg" DESTINATION share/icons/hicolor/scalable/apps)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
 -    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
 +    install(FILES "${CMAKE_SOURCE_DIR}/../debian/org.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
