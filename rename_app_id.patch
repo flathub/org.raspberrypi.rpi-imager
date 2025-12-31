@@ -1,0 +1,189 @@
+diff --git a/.gitignore b/.gitignore
+index fc749cbc..6f9f4f55 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -20,7 +20,7 @@ debian/files
+ debian/*.substvars
+ debian/debhelper**
+ debian/tmp
+-debian/com.raspberrypi.rpi-imager.metainfo.xml
++debian/org.raspberrypi.rpi-imager.metainfo.xml
+ 
+ # macOS
+ .DS_Store
+diff --git a/debian/com.raspberrypi.rpi-imager-cli.desktop b/debian/org.raspberrypi.rpi-imager-cli.desktop
+similarity index 100%
+rename from debian/com.raspberrypi.rpi-imager-cli.desktop
+rename to debian/org.raspberrypi.rpi-imager-cli.desktop
+diff --git a/debian/com.raspberrypi.rpi-imager-embedded.desktop b/debian/org.raspberrypi.rpi-imager-embedded.desktop
+similarity index 100%
+rename from debian/com.raspberrypi.rpi-imager-embedded.desktop
+rename to debian/org.raspberrypi.rpi-imager-embedded.desktop
+diff --git a/debian/com.raspberrypi.rpi-imager-manifest.xml b/debian/org.raspberrypi.rpi-imager-manifest.xml
+similarity index 100%
+rename from debian/com.raspberrypi.rpi-imager-manifest.xml
+rename to debian/org.raspberrypi.rpi-imager-manifest.xml
+diff --git a/debian/com.raspberrypi.rpi-imager.desktop b/debian/org.raspberrypi.rpi-imager.desktop
+similarity index 100%
+rename from debian/com.raspberrypi.rpi-imager.desktop
+rename to debian/org.raspberrypi.rpi-imager.desktop
+diff --git a/debian/com.raspberrypi.rpi-imager.metainfo.xml.in b/debian/org.raspberrypi.rpi-imager.metainfo.xml.in
+similarity index 96%
+rename from debian/com.raspberrypi.rpi-imager.metainfo.xml.in
+rename to debian/org.raspberrypi.rpi-imager.metainfo.xml.in
+index c1e1ee01..557ee4f1 100644
+--- a/debian/com.raspberrypi.rpi-imager.metainfo.xml.in
++++ b/debian/org.raspberrypi.rpi-imager.metainfo.xml.in
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+ <component type="desktop-application">
+-  <id>com.raspberrypi.rpi-imager</id>
++  <id>org.raspberrypi.rpi-imager</id>
+   <metadata_license>CC0-1.0</metadata_license>
+   <project_license>Apache-2.0</project_license>
+   <name>Raspberry Pi Imager</name>
+@@ -27,7 +27,7 @@
+       download the file again.
+     </p>
+   </description>
+-  <launchable type="desktop-id">com.raspberrypi.rpi-imager.desktop</launchable>
++  <launchable type="desktop-id">org.raspberrypi.rpi-imager.desktop</launchable>
+   <screenshots>
+     <screenshot type="default">
+       <image>http://downloads.raspberrypi.org/imager/IMAGING-UTILITY-MAIN.png</image>
+diff --git a/debian/com.raspberrypi.rpi-imager.policy b/debian/org.raspberrypi.rpi-imager.policy
+similarity index 94%
+rename from debian/com.raspberrypi.rpi-imager.policy
+rename to debian/org.raspberrypi.rpi-imager.policy
+index fc80a4b8..c8f66633 100644
+--- a/debian/com.raspberrypi.rpi-imager.policy
++++ b/debian/org.raspberrypi.rpi-imager.policy
+@@ -7,7 +7,7 @@
+   <vendor>Raspberry Pi Ltd</vendor>
+   <vendor_url>https://www.raspberrypi.com/</vendor_url>
+ 
+-  <action id="com.raspberrypi.rpi-imager.run">
++  <action id="org.raspberrypi.rpi-imager.run">
+     <description>Run Raspberry Pi Imager</description>
+     <message>Authentication is required to run Raspberry Pi Imager</message>
+     <icon_name>rpi-imager</icon_name>
+diff --git a/debian/rpi-imager-cli.install b/debian/rpi-imager-cli.install
+index 1c813ad1..8ca0b4ae 100755
+--- a/debian/rpi-imager-cli.install
++++ b/debian/rpi-imager-cli.install
+@@ -6,4 +6,4 @@
+ 
+ src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
+ 
+-debian/com.raspberrypi.rpi-imager-cli.desktop /usr/share/applications/
++debian/org.raspberrypi.rpi-imager-cli.desktop /usr/share/applications/
+diff --git a/debian/rpi-imager-embedded.install b/debian/rpi-imager-embedded.install
+index f938a9ac..72e6544e 100755
+--- a/debian/rpi-imager-embedded.install
++++ b/debian/rpi-imager-embedded.install
+@@ -6,4 +6,4 @@ debian/embedded-imager.service        lib/systemd/system/
+ 
+ src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
+ 
+-debian/com.raspberrypi.rpi-imager-embedded.desktop /usr/share/applications/ 
+\ No newline at end of file
++debian/org.raspberrypi.rpi-imager-embedded.desktop /usr/share/applications/ 
+\ No newline at end of file
+diff --git a/debian/rpi-imager.install b/debian/rpi-imager.install
+index e3cd2dde..80887173 100755
+--- a/debian/rpi-imager.install
++++ b/debian/rpi-imager.install
+@@ -5,11 +5,11 @@
+ [linux-arm64] rpi-imager-aarch64.AppImage => /usr/bin/rpi-imager
+ 
+ # Install PolicyKit policy for privilege escalation
+-debian/com.raspberrypi.rpi-imager.policy /usr/share/polkit-1/actions/
++debian/org.raspberrypi.rpi-imager.policy /usr/share/polkit-1/actions/
+ 
+ src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
+ 
+-debian/com.raspberrypi.rpi-imager.desktop /usr/share/applications/
+-debian/com.raspberrypi.rpi-imager.metainfo.xml /usr/share/metainfo/
+-debian/com.raspberrypi.rpi-imager-manifest.xml /usr/share/mime/packages/
++debian/org.raspberrypi.rpi-imager.desktop /usr/share/applications/
++debian/org.raspberrypi.rpi-imager.metainfo.xml /usr/share/metainfo/
++debian/org.raspberrypi.rpi-imager-manifest.xml /usr/share/mime/packages/
+ 
+diff --git a/src/linux/PlatformPackaging.cmake b/src/linux/PlatformPackaging.cmake
+index a90de134..9ebda19b 100644
+--- a/src/linux/PlatformPackaging.cmake
++++ b/src/linux/PlatformPackaging.cmake
+@@ -15,8 +15,8 @@ endif()
+ # Generate metainfo.xml with current version
+ # Output to debian/ directory for dpkg-buildpackage
+ configure_file(
+-    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml.in"
+-    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml"
++    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml.in"
++    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml"
+     @ONLY)
+ 
+ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+@@ -25,12 +25,12 @@ if(BUILD_CLI_ONLY)
+     # CLI-only build: install CLI-specific desktop file (marked as NoDisplay)
+     # Icon is still required for AppImage tooling (linuxdeploy) even though NoDisplay=true
+     install(FILES "${CMAKE_CURRENT_LIST_DIR}/icon/rpi-imager.svg" DESTINATION share/icons/hicolor/scalable/apps)
+-    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
++    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager-cli.desktop" DESTINATION share/applications)
+ else()
+     # GUI build: install full desktop integration
+     install(FILES "${CMAKE_CURRENT_LIST_DIR}/icon/rpi-imager.svg" DESTINATION share/icons/hicolor/scalable/apps)
+-    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
+-    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
++    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
++    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
+ endif()
+ 
+ 
+diff --git a/src/mac/Info.plist.in b/src/mac/Info.plist.in
+index 36b88491..ee8262c3 100644
+--- a/src/mac/Info.plist.in
++++ b/src/mac/Info.plist.in
+@@ -59,7 +59,7 @@
+       <string>Owner</string>
+       <key>LSItemContentTypes</key>
+       <array>
+-        <string>com.raspberrypi.rpi-imager-manifest</string>
++        <string>org.raspberrypi.rpi-imager-manifest</string>
+       </array>
+     </dict>
+   </array>
+@@ -67,7 +67,7 @@
+   <array>
+     <dict>
+       <key>UTTypeIdentifier</key>
+-      <string>com.raspberrypi.rpi-imager-manifest</string>
++      <string>org.raspberrypi.rpi-imager-manifest</string>
+       <key>UTTypeDescription</key>
+       <string>Raspberry Pi Imager Manifest</string>
+       <key>UTTypeConformsTo</key>
+diff --git a/src/mac/PlatformPackaging.cmake b/src/mac/PlatformPackaging.cmake
+index f7209972..ad25ac86 100644
+--- a/src/mac/PlatformPackaging.cmake
++++ b/src/mac/PlatformPackaging.cmake
+@@ -11,7 +11,7 @@ else()
+     # Set all required bundle properties
+     set(MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}")
+     set(MACOSX_BUNDLE_EXECUTABLE_NAME "${PROJECT_NAME}")
+-    set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.raspberrypi.rpi-imager")
++    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.raspberrypi.rpi-imager")
+     set(MACOSX_BUNDLE_BUNDLE_VERSION "${IMAGER_VERSION_STR}")
+     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${IMAGER_VERSION_STR}")
+     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${IMAGER_VERSION_STR}")
+diff --git a/src/windows/rpi-imager.manifest.in b/src/windows/rpi-imager.manifest.in
+index 9732b0e1..7563858d 100644
+--- a/src/windows/rpi-imager.manifest.in
++++ b/src/windows/rpi-imager.manifest.in
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8" standalone="yes"?>
+ <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+-  <assemblyIdentity version="@IMAGER_VERSION_MAJOR@.@IMAGER_VERSION_MINOR@.@IMAGER_VERSION_PATCH@.0" processorArchitecture="AMD64" name="com.raspberrypi.rpi-imager" type="win32" />
++  <assemblyIdentity version="@IMAGER_VERSION_MAJOR@.@IMAGER_VERSION_MINOR@.@IMAGER_VERSION_PATCH@.0" processorArchitecture="AMD64" name="org.raspberrypi.rpi-imager" type="win32" />
+   <description>Raspberry Pi Imager</description>
+    <dependency />
+   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">

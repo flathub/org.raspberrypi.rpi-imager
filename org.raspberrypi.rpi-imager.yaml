@@ -36,8 +36,8 @@ modules:
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.2.tar.gz
-        sha256: cc3b784705ca0638eff8b9dc976eb9a02892bf5076d95b4af9f7f355a17326f6
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.3.tar.gz
+        sha256: 71143495c6a228557f763249de4da3050cf8d0f7eaadde6b5e64819699fb7f45
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -80,12 +80,19 @@ modules:
         commit: 9525f90ca4bd14c7b335e2f8c84a4607b0af6bdf
         dest: src/_deps/libarchive-src
 
+        # Pre-populate curl dependency
+      - type: git
+        url: https://github.com/curl/curl.git
+        tag: curl-8_17_0
+        commit: 400fffa90f30c7a2dc762fa33009d24851bd2016
+        dest: src/_deps/curl-src
+
       - type: file
         path: capital-cities.json
         dest: src/
 
       - type: file
-        path: tzdata2025b.tar.gz
+        path: tzdata2025c.tar.gz
         dest: src/
 
       - type: file
@@ -96,4 +103,13 @@ modules:
         path: org.raspberrypi.rpi-imager.metainfo.xml
 
       - type: patch
-        path: remove-vendoring.patch
+        path: rename_app_id.patch
+
+      - type: patch
+        path: diable_telemetry.patch
+
+      - type: patch
+        path: use_local_localisation_sources.patch
+
+      #- type: patch
+      #  path: curl.patch

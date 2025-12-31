@@ -1,0 +1,31 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 4a24e0c6..72cdc532 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -328,7 +328,7 @@ option(GENERATE_TIMEZONES_FROM_IANA "Generate timezone list from latest IANA dat
+
+ if(GENERATE_TIMEZONES_FROM_IANA)
+     set(TZDATA_VERSION "2025c") # Update this to get newer timezone data
+-    set(TZDATA_URL "https://data.iana.org/time-zones/releases/tzdata${TZDATA_VERSION}.tar.gz")
++    set(TZDATA_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/tzdata${TZDATA_VERSION}.tar.gz")
+
+     # The generator script handles fallback internally - it downloads from API
+     # and falls back to the source file if the download fails (offline builds)
+@@ -346,7 +346,7 @@ endif()
+ option(GENERATE_COUNTRIES_FROM_REGDB "Generate countries list from latest wireless-regdb" ON)
+
+ if(GENERATE_COUNTRIES_FROM_REGDB)
+-    set(REGDB_URL "https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/db.txt")
++    set(REGDB_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/wireless-regdb.txt")
+
+     # The generator script handles fallback internally - it downloads from API
+     # and falls back to the source file if the download fails (offline builds)
+@@ -362,7 +362,7 @@ endif()
+ option(GENERATE_CAPITAL_CITIES "Generate capital cities list from REST Countries API" ON)
+
+ if(GENERATE_CAPITAL_CITIES)
+-    set(REST_COUNTRIES_URL "https://restcountries.com/v3.1/all?fields=name,capital,cca2,timezones")
++    set(REST_COUNTRIES_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/capital-cities.json")
+
+     # The generator script handles fallback internally - it downloads from API
+     # and falls back to the source file if the download fails (offline builds)
