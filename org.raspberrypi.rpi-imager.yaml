@@ -28,6 +28,7 @@ modules:
       - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=./_deps/nghttp2-src
       - -DFETCHCONTENT_SOURCE_DIR_ZLIB=./_deps/zlib-src
       - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=./_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_CURL=./_deps/curl-src
       - -DBUILD_CLI_ONLY=OFF
     buildsystem: cmake-ninja
     builddir: false
