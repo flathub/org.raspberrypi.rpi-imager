@@ -34,6 +34,8 @@ modules:
     builddir: false
     subdir: src
     post-install:
+      - rm "${FLATPAK_DEST}/share/metainfo/org.raspberrypi.rpi-imager.metainfo.xml"
+      - install -Dm644 ../org.raspberrypi.rpi-imager.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo/"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
@@ -111,6 +113,9 @@ modules:
 
       - type: patch
         path: use_local_localisation_sources.patch
+
+      - type: patch
+        path: disable_LTO.patch
 
       #- type: patch
       #  path: curl.patch
