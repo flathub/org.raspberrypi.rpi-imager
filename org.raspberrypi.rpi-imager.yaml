@@ -52,8 +52,8 @@ modules:
       # Pre-populate XZ/LZMA dependency
       - type: git
         url: https://github.com/tukaani-project/xz.git
-        tag: v5.8.1
-        commit: a522a226545730551f7e7c2685fab27cf567746c
+        tag: v5.8.2
+        commit: 3d078b52adbff566ccfc51067dfbf742ecf3ef86
         dest: src/_deps/xz-src
 
       # Pre-populate zstd dependency
@@ -66,8 +66,8 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        tag: v1.67.1
-        commit: 49908f992027821912b96a13898b665a35aa3a0a
+        tag: v1.68.0
+        commit: 534b74b72524e962c18c7146470914632ca7eb2d
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
@@ -79,8 +79,8 @@ modules:
       # Pre-populate libarchive dependency
       - type: git
         url: https://github.com/libarchive/libarchive.git
-        tag: v3.8.1
-        commit: 9525f90ca4bd14c7b335e2f8c84a4607b0af6bdf
+        tag: v3.8.4
+        commit: d114ceee6de08a7a60ff1209492ba38bf9436f79
         dest: src/_deps/libarchive-src
 
         # Pre-populate curl dependency
