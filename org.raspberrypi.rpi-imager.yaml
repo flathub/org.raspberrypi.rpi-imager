@@ -23,19 +23,18 @@ modules:
       - -DENABLE_TELEMETRY:BOOL=OFF
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-      - -DFETCHCONTENT_SOURCE_DIR_XZ=./_deps/xz-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=./_deps/zstd-src
-      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=./_deps/nghttp2-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=./_deps/zlib-src
-      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=./_deps/libarchive-src
-      - -DFETCHCONTENT_SOURCE_DIR_CURL=./_deps/curl-src
-      - -DBUILD_CLI_ONLY=OFF
+      - -DFETCHCONTENT_SOURCE_DIR_XZ=_deps/xz-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=_deps/zstd-src
+      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=_deps/nghttp2-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=_deps/zlib-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_CURL=_deps/curl-src
     buildsystem: cmake-ninja
     builddir: false
     subdir: src
     post-install:
-      - rm "${FLATPAK_DEST}/share/metainfo/org.raspberrypi.rpi-imager.metainfo.xml"
-      - install -Dm644 ../org.raspberrypi.rpi-imager.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo/"
+      - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../${FLATPAK_ID}.metainfo.xml"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
@@ -95,11 +94,14 @@ modules:
         dest: src/
 
       - type: file
-        path: tzdata2025c.tar.gz
+        url: https://data.iana.org/time-zones/releases/tzdata2025c.tar.gz
+        sha256: 4aa79e4effee53fc4029ffe5f6ebe97937282ebcdf386d5d2da91ce84142f957
         dest: src/
 
       - type: file
-        path: wireless-regdb.txt
+        url: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/db.txt?id=61a463705f02b617239969c269e4882bcb5af035
+        sha256: e8dfd39cfdf43fa6c55ecbff8b59103909b55118c61705299d4b81dfed712577
+        dest-filename: wireless-regdb.txt
         dest: src/
 
       - type: file
