@@ -23,23 +23,23 @@ modules:
       - -DENABLE_TELEMETRY:BOOL=OFF
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-      - -DFETCHCONTENT_SOURCE_DIR_XZ=_deps/xz-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=_deps/zstd-src
-      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=_deps/nghttp2-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=_deps/zlib-src
-      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=_deps/libarchive-src
-      - -DFETCHCONTENT_SOURCE_DIR_CURL=_deps/curl-src
+      - -DFETCHCONTENT_SOURCE_DIR_XZ=../_deps/xz-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=../_deps/zstd-src
+      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=../_deps/nghttp2-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=../_deps/zlib-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=../_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_CURL=../_deps/curl-src
     buildsystem: cmake-ninja
-    builddir: false
+    builddir: true
     subdir: src
     post-install:
       - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
-      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../${FLATPAK_ID}.metainfo.xml"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.3.tar.gz
-        sha256: 71143495c6a228557f763249de4da3050cf8d0f7eaadde6b5e64819699fb7f45
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.4.tar.gz
+        sha256: 51a8110bbc885cdfbd3541ed81091c708e7b8dc6f43717cadfd88faffccdda97
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
