@@ -127,5 +127,8 @@ modules:
       - type: patch
         path: disable_LTO.patch
 
+      - type: patch
+        path: fix_zstd.patch
+
       #- type: patch
       #  path: curl.patch
