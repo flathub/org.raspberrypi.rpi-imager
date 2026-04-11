@@ -110,21 +110,36 @@ index e3cd2dde..80887173 100755
 +debian/org.raspberrypi.rpi-imager-manifest.xml /usr/share/mime/packages/
  
 diff --git a/src/linux/PlatformPackaging.cmake b/src/linux/PlatformPackaging.cmake
-index a90de134..9ebda19b 100644
+index 53366d57..13b0ea62 100644
 --- a/src/linux/PlatformPackaging.cmake
 +++ b/src/linux/PlatformPackaging.cmake
-@@ -15,8 +15,8 @@ endif()
- # Generate metainfo.xml with current version
- # Output to debian/ directory for dpkg-buildpackage
- configure_file(
--    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml.in"
--    "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml"
-+    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml.in"
-+    "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml"
-     @ONLY)
+@@ -14,20 +14,20 @@ endif()
  
- install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-@@ -25,12 +25,12 @@ if(BUILD_CLI_ONLY)
+ # Generate metainfo.xml at build time so version stays in sync with the binary
+ add_custom_command(
+-    OUTPUT "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml"
++    OUTPUT "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml"
+     COMMAND ${CMAKE_COMMAND}
+         -DVERSION_VARS_FILE=${IMAGER_VERSION_VARS}
+-        -DINPUT=${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml.in
+-        -DOUTPUT=${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml
++        -DINPUT=${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml.in
++        -DOUTPUT=${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml
+         -P ${CONFIGURE_VERSIONED_SCRIPT}
+     DEPENDS
+         ${IMAGER_VERSION_VARS}
+-        ${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml.in
++        ${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml.in
+     COMMENT "Configuring metainfo.xml with build-time version"
+     VERBATIM
+ )
+ add_custom_target(generate_metainfo
+-    DEPENDS "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml")
++    DEPENDS "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml")
+ add_dependencies(generate_metainfo generate_version)
+ add_dependencies(${PROJECT_NAME} generate_metainfo)
+ 
+@@ -37,12 +37,12 @@ if(BUILD_CLI_ONLY)
      # CLI-only build: install CLI-specific desktop file (marked as NoDisplay)
      # Icon is still required for AppImage tooling (linuxdeploy) even though NoDisplay=true
      install(FILES "${CMAKE_CURRENT_LIST_DIR}/icon/rpi-imager.svg" DESTINATION share/icons/hicolor/scalable/apps)
@@ -140,50 +155,3 @@ index a90de134..9ebda19b 100644
  endif()
  
  
-diff --git a/src/mac/Info.plist.in b/src/mac/Info.plist.in
-index 36b88491..ee8262c3 100644
---- a/src/mac/Info.plist.in
-+++ b/src/mac/Info.plist.in
-@@ -59,7 +59,7 @@
-       <string>Owner</string>
-       <key>LSItemContentTypes</key>
-       <array>
--        <string>com.raspberrypi.rpi-imager-manifest</string>
-+        <string>org.raspberrypi.rpi-imager-manifest</string>
-       </array>
-     </dict>
-   </array>
-@@ -67,7 +67,7 @@
-   <array>
-     <dict>
-       <key>UTTypeIdentifier</key>
--      <string>com.raspberrypi.rpi-imager-manifest</string>
-+      <string>org.raspberrypi.rpi-imager-manifest</string>
-       <key>UTTypeDescription</key>
-       <string>Raspberry Pi Imager Manifest</string>
-       <key>UTTypeConformsTo</key>
-diff --git a/src/mac/PlatformPackaging.cmake b/src/mac/PlatformPackaging.cmake
-index f7209972..ad25ac86 100644
---- a/src/mac/PlatformPackaging.cmake
-+++ b/src/mac/PlatformPackaging.cmake
-@@ -11,7 +11,7 @@ else()
-     # Set all required bundle properties
-     set(MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}")
-     set(MACOSX_BUNDLE_EXECUTABLE_NAME "${PROJECT_NAME}")
--    set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.raspberrypi.rpi-imager")
-+    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.raspberrypi.rpi-imager")
-     set(MACOSX_BUNDLE_BUNDLE_VERSION "${IMAGER_VERSION_STR}")
-     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${IMAGER_VERSION_STR}")
-     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${IMAGER_VERSION_STR}")
-diff --git a/src/windows/rpi-imager.manifest.in b/src/windows/rpi-imager.manifest.in
-index 9732b0e1..7563858d 100644
---- a/src/windows/rpi-imager.manifest.in
-+++ b/src/windows/rpi-imager.manifest.in
-@@ -1,6 +1,6 @@
- <?xml version="1.0" encoding="utf-8" standalone="yes"?>
- <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
--  <assemblyIdentity version="@IMAGER_VERSION_MAJOR@.@IMAGER_VERSION_MINOR@.@IMAGER_VERSION_PATCH@.0" processorArchitecture="AMD64" name="com.raspberrypi.rpi-imager" type="win32" />
-+  <assemblyIdentity version="@IMAGER_VERSION_MAJOR@.@IMAGER_VERSION_MINOR@.@IMAGER_VERSION_PATCH@.0" processorArchitecture="AMD64" name="org.raspberrypi.rpi-imager" type="win32" />
-   <description>Raspberry Pi Imager</description>
-    <dependency />
-   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">

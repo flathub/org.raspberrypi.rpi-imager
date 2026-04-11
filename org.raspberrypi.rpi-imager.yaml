@@ -16,6 +16,7 @@ finish-args:
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
   - --system-talk-name=org.freedesktop.UDisks2
+  - --system-talk-name=org.freedesktop.PolicyKit1
 modules:
   - name: rpi-imager
     config-opts:
@@ -29,6 +30,7 @@ modules:
       - -DFETCHCONTENT_SOURCE_DIR_ZLIB=../_deps/zlib-src
       - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=../_deps/libarchive-src
       - -DFETCHCONTENT_SOURCE_DIR_CURL=../_deps/curl-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBUSB=../_deps/libusb-src
     buildsystem: cmake-ninja
     builddir: true
     subdir: src
@@ -38,8 +40,8 @@ modules:
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
     sources:
       - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.6.tar.gz
-        sha256: 3a7e0b8124e5625591c0a3e3eb0bd14da42da8c618c1131af2bf050b1722700b
+        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.8.tar.gz
+        sha256: e85c45008d5b1f12684532450159f74713545cfd6663b0d229d319b09878f7b0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -65,29 +67,35 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        tag: v1.68.0
-        commit: 534b74b72524e962c18c7146470914632ca7eb2d
+        tag: v1.68.1
+        commit: f769990597670f3ea8d2440d1e18a3f9a0df9bc0
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
       - type: git
         url: https://github.com/madler/zlib.git
-        commit: 5a82f71ed1dfc0bec044d9702463dbdf84ea3b71
+        commit: da607da739fa6047df13e66a2af6b8bec7c2a498
+        tag: v1.3.2
         dest: src/_deps/zlib-src
 
       # Pre-populate libarchive dependency
       - type: git
         url: https://github.com/libarchive/libarchive.git
-        tag: v3.8.4
-        commit: d114ceee6de08a7a60ff1209492ba38bf9436f79
+        tag: v3.8.6
+        commit: 3a9249b4eeb2a101ca4e0d2b12e4007642bac126
         dest: src/_deps/libarchive-src
 
         # Pre-populate curl dependency
       - type: git
         url: https://github.com/curl/curl.git
-        tag: curl-8_17_0
-        commit: 400fffa90f30c7a2dc762fa33009d24851bd2016
+        tag: curl-8_19_0
+        commit: 8c908d2d0a6d32abdedda2c52e90bd56ec76c24d
         dest: src/_deps/curl-src
+
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2
+        sha256: 5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85
+        dest: src/_deps/libusb-src
 
       - type: file
         path: capital-cities.json
