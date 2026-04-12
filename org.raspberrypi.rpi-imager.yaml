@@ -2,7 +2,7 @@ app-id: org.raspberrypi.rpi-imager
 runtime: org.kde.Platform
 runtime-version: '6.9'
 sdk: org.kde.Sdk
-command: rpi-imager
+command: start-rpi-imager
 rename-icon: rpi-imager
 finish-args:
   - --device=all
@@ -37,11 +37,13 @@ modules:
     post-install:
       - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
       - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
-      - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
+      - desktop-file-edit --set-key=Exec --set-value='/app/bin/start-rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
+      - install -Dm755 "../../start-rpi-imager.sh" "${FLATPAK_DEST}/bin/start-rpi-imager"
     sources:
-      - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v2.0.8.tar.gz
-        sha256: e85c45008d5b1f12684532450159f74713545cfd6663b0d229d319b09878f7b0
+      - type: git
+        url: https://github.com/raspberrypi/rpi-imager.git
+        tag: v2.0.8
+        commit: de5469c257bc839e6377a323e460ec8208f2a137
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -67,8 +69,8 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        tag: v1.68.1
-        commit: f769990597670f3ea8d2440d1e18a3f9a0df9bc0
+        #tag: v1.68.1 - force push to a depencency branch caused this to break.
+        commit: b7e422e2d0b053413849bfc45b1e31948e987660
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
@@ -115,6 +117,9 @@ modules:
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
 
+      - type: file
+        path: start-rpi-imager.sh
+
       - type: patch
         path: rename_app_id.patch
 
@@ -129,6 +134,9 @@ modules:
 
       - type: patch
         path: fix_zstd.patch
+
+      - type: patch
+        path: sudo_message.patch
 
       #- type: patch
       #  path: curl.patch
