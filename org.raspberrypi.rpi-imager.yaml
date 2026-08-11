@@ -1,44 +1,56 @@
 app-id: org.raspberrypi.rpi-imager
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.11'
 sdk: org.kde.Sdk
-command: rpi-imager
+command: start-rpi-imager
 rename-icon: rpi-imager
 finish-args:
   - --device=all
   - --share=ipc
   - --share=network
-  - --socket=fallback-x11
   - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --filesystem=/media
   - --filesystem=/run/media
   - --talk-name=org.a11y.*
   - --talk-name=org.freedesktop.Notifications
   - --system-talk-name=org.freedesktop.UDisks2
+  - --system-talk-name=org.freedesktop.PolicyKit1
+  - --talk-name=org.freedesktop.Flatpak
 modules:
   - name: rpi-imager
     config-opts:
       - -DENABLE_CHECK_VERSION:BOOL=OFF
       - -DENABLE_TELEMETRY:BOOL=OFF
-      - -DCMAKE_BUILD_TYPE=MinSizeRel
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-      - -DFETCHCONTENT_SOURCE_DIR_XZ=_deps/xz-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=_deps/zstd-src
-      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=_deps/nghttp2-src
-      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=_deps/zlib-src
-      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_XZ=../_deps/xz-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZSTD=../_deps/zstd-src
+      - -DFETCHCONTENT_SOURCE_DIR_NGHTTP2=../_deps/nghttp2-src
+      - -DFETCHCONTENT_SOURCE_DIR_ZLIB=../_deps/zlib-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBARCHIVE=../_deps/libarchive-src
+      - -DFETCHCONTENT_SOURCE_DIR_CURL=../_deps/curl-src
+      - -DFETCHCONTENT_SOURCE_DIR_LIBUSB=../_deps/libusb-src
     buildsystem: cmake-ninja
-    builddir: false
+    builddir: true
     subdir: src
     post-install:
       - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
-      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../${FLATPAK_ID}.metainfo.xml"
-      - desktop-file-edit --set-key=Exec --set-value='/app/bin/rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
+      - desktop-file-edit --set-key=Exec --set-value='/app/bin/start-rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
+      - install -Dm755 "../../host-exec-wrapper.sh" "${FLATPAK_DEST}/bin/host-exec-wrapper"
+      - ln -s /app/bin/host-exec-wrapper /app/bin/pkexec
+      - ln -s /app/bin/host-exec-wrapper /app/bin/gksu
+      - ln -s /app/bin/host-exec-wrapper /app/bin/gksudo
+      - ln -s /app/bin/host-exec-wrapper /app/bin/kdesu
+      - ln -s /app/bin/host-exec-wrapper /app/bin/kdesudo
+      - install -Dm755 "../../start-rpi-imager.sh" "${FLATPAK_DEST}/bin/start-rpi-imager"
     sources:
-      - type: archive
-        url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v1.9.6.tar.gz
-        sha256: dbaef70eaeeec7bab95adb677681ef3bdb63c5568b53915fde78276c04421ed3
+      - type: git
+        url: https://github.com/raspberrypi/rpi-imager.git
+        tag: v2.0.10
+        commit: 467be3d3e88f5d83fa78c78788f6e6fdce61a47e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -50,8 +62,8 @@ modules:
       # Pre-populate XZ/LZMA dependency
       - type: git
         url: https://github.com/tukaani-project/xz.git
-        tag: v5.8.1
-        commit: a522a226545730551f7e7c2685fab27cf567746c
+        tag: v5.8.2
+        commit: 3d078b52adbff566ccfc51067dfbf742ecf3ef86
         dest: src/_deps/xz-src
 
       # Pre-populate zstd dependency
@@ -64,24 +76,80 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        tag: v1.66.0
-        commit: ac22e0efe3f82f43c1366961c89a50ee821cfba3
+        tag: v1.70.0 # - force push to a depencency branch caused this to break.
+        #commit: 68cb6900fde14c77f0cd7add0e094a862960eb99
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
       - type: git
         url: https://github.com/madler/zlib.git
-        commit: 5a82f71ed1dfc0bec044d9702463dbdf84ea3b71
+        commit: da607da739fa6047df13e66a2af6b8bec7c2a498
+        tag: v1.3.2
         dest: src/_deps/zlib-src
 
       # Pre-populate libarchive dependency
       - type: git
         url: https://github.com/libarchive/libarchive.git
-        tag: v3.8.1
-        commit: 9525f90ca4bd14c7b335e2f8c84a4607b0af6bdf
+        tag: v3.8.6
+        commit: 3a9249b4eeb2a101ca4e0d2b12e4007642bac126
         dest: src/_deps/libarchive-src
+
+        # Pre-populate curl dependency
+      - type: git
+        url: https://github.com/curl/curl.git
+        tag: curl-8_19_0
+        commit: 8c908d2d0a6d32abdedda2c52e90bd56ec76c24d
+        dest: src/_deps/curl-src
+
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2
+        sha256: 5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85
+        dest: src/_deps/libusb-src
+
+      - type: file
+        path: capital-cities.json
+        dest: src/
+
+      - type: file
+        url: https://data.iana.org/time-zones/releases/tzdata2025c.tar.gz
+        sha256: 4aa79e4effee53fc4029ffe5f6ebe97937282ebcdf386d5d2da91ce84142f957
+        dest: src/
+
+      - type: file
+        url: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/db.txt?id=61a463705f02b617239969c269e4882bcb5af035
+        sha256: e8dfd39cfdf43fa6c55ecbff8b59103909b55118c61705299d4b81dfed712577
+        dest-filename: wireless-regdb.txt
+        dest: src/
+
       - type: file
         path: org.raspberrypi.rpi-imager.metainfo.xml
 
+      - type: file
+        path: host-exec-wrapper.sh
+
+      - type: file
+        path: start-rpi-imager.sh
+
       - type: patch
-        path: remove-vendoring.patch
+        path: rename_app_id.patch
+
+      - type: patch
+        path: diable_telemetry.patch
+
+      - type: patch
+        path: use_local_localisation_sources.patch
+
+      - type: patch
+        path: disable_LTO.patch
+
+      - type: patch
+        path: fix_zstd.patch
+
+      - type: patch
+        path: platform_quirks.patch
+
+      - type: patch
+        path: sudo_message.patch
+
+      #- type: patch
+      #  path: curl.patch
