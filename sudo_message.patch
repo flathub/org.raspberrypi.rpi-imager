@@ -5,7 +5,7 @@ index 25a5732b..d9845c82 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -18,34 +18,12 @@ index c0dacc36..ea2a295b 100644
 @@ -2032,7 +2032,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>No esteu executant com a root.
              Executeu amb privilegis elevats: sudo %1</translation>
      </message>
-diff --git a/src/i18n/rpi-imager_cs.ts b/src/i18n/rpi-imager_cs.ts
-index 7d1272ae..47f55e0f 100644
---- a/src/i18n/rpi-imager_cs.ts
-+++ b/src/i18n/rpi-imager_cs.ts
-@@ -1471,7 +1471,7 @@ Please check the device and try again.</source>
-     <message>
-         <source>Navigate to a folder using the panel on the left,
- or type a path in the address bar above.</source>
--        <translation>Přejděte do složky pomocí panelu vlevo, 
-+        <translation>Přejděte do složky pomocí panelu vlevo,
- nebo zadejte cestu do adresního řádku nahoře.</translation>
-     </message>
-     <message>
-@@ -2033,7 +2033,7 @@ Spusťte prosím program jako správce.</translation>
-     <message>
-         <source>You are not running as root.
- 
--Please run with elevated privileges: sudo %1</source>
-+Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
-         <translation>Nepracujete jako root.
- 
- Spusťte prosím s vyššími právy: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_de.ts b/src/i18n/rpi-imager_de.ts
 index 03b1c19a..ba18c6ac 100644
 --- a/src/i18n/rpi-imager_de.ts
@@ -53,11 +31,11 @@ index 03b1c19a..ba18c6ac 100644
 @@ -2034,7 +2034,7 @@ Bitte führen Sie das Programm als Administrator aus.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Sie sind nicht als Root angemeldet.
- 
+
  Bitte führen Sie den Befehl mit erhöhten Rechten aus: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_en-US.ts b/src/i18n/rpi-imager_en-US.ts
 index 68523e21..327e779a 100644
@@ -66,7 +44,7 @@ index 68523e21..327e779a 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -79,7 +57,7 @@ index 6f14497d..db7c5f2e 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -92,11 +70,11 @@ index 55cb3be4..034f86c2 100644
 @@ -2033,7 +2033,7 @@ Por favor, ejecute como administrador.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>No está ejecutando como root.
- 
+
  Por favor, ejecute con privilegios elevados: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_fr.ts b/src/i18n/rpi-imager_fr.ts
 index c8613459..d01c3a46 100644
@@ -105,25 +83,12 @@ index c8613459..d01c3a46 100644
 @@ -2033,7 +2033,7 @@ Veuillez vous connecter en tant qu&apos;administrateur.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Vous n&apos;êtes pas connecté en tant que root.
- 
+
  Lancer l&apos;application avec des privilèges élevés&#xa0;: sudo %1</translation>
-diff --git a/src/i18n/rpi-imager_ga.ts b/src/i18n/rpi-imager_ga.ts
-index e70411e2..7837aae6 100644
---- a/src/i18n/rpi-imager_ga.ts
-+++ b/src/i18n/rpi-imager_ga.ts
-@@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
-     <message>
-         <source>You are not running as root.
- 
--Please run with elevated privileges: sudo %1</source>
-+Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
-         <translation type="unfinished"></translation>
-     </message>
-     <message>
 diff --git a/src/i18n/rpi-imager_he.ts b/src/i18n/rpi-imager_he.ts
 index fc0cbc2d..70dd5534 100644
 --- a/src/i18n/rpi-imager_he.ts
@@ -131,7 +96,7 @@ index fc0cbc2d..70dd5534 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -144,7 +109,7 @@ index 82c7237c..58e20228 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -157,11 +122,11 @@ index 820b95ca..aef19ca3 100644
 @@ -2032,7 +2032,7 @@ Esegui come Amministratore.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Non stai eseguendo come root.
- 
+
  Esegui con privilegi elevati: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_ja.ts b/src/i18n/rpi-imager_ja.ts
 index e731cefa..122652cc 100644
@@ -170,7 +135,7 @@ index e731cefa..122652cc 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -183,34 +148,12 @@ index 779b7fcc..453c40c0 100644
 @@ -2031,7 +2031,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
      </message>
      <message>
-diff --git a/src/i18n/rpi-imager_ko.ts b/src/i18n/rpi-imager_ko.ts
-index b4617b5f..8255fc91 100644
---- a/src/i18n/rpi-imager_ko.ts
-+++ b/src/i18n/rpi-imager_ko.ts
-@@ -1471,7 +1471,7 @@ Please check the device and try again.</source>
-     <message>
-         <source>Navigate to a folder using the panel on the left,
- or type a path in the address bar above.</source>
--        <translation>왼쪽 패널을 사용해 폴더를 탐색하거나 
-+        <translation>왼쪽 패널을 사용해 폴더를 탐색하거나
- 상단 주소 표시줄에 경로를 입력하세요</translation>
-     </message>
-     <message>
-@@ -2033,7 +2033,7 @@ Please run as Administrator.</source>
-     <message>
-         <source>You are not running as root.
- 
--Please run with elevated privileges: sudo %1</source>
-+Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
-         <translation>root로 실행되지 않았습니다.
- 
- 관리자 권한으로 실행하십시오: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_nl.ts b/src/i18n/rpi-imager_nl.ts
 index 54da3e50..5bdee4ec 100644
 --- a/src/i18n/rpi-imager_nl.ts
@@ -218,7 +161,7 @@ index 54da3e50..5bdee4ec 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -231,7 +174,7 @@ index d08ee2ba..2a2ef87a 100644
 @@ -2031,7 +2031,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -244,11 +187,11 @@ index 3880365b..57c1926e 100644
 @@ -2033,7 +2033,7 @@ Execute como Administrador.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Não está a executar como root.
- 
+
  Execute com privilégios elevados: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_pt.ts b/src/i18n/rpi-imager_pt.ts
 index 8b58ed52..b750487f 100644
@@ -257,11 +200,11 @@ index 8b58ed52..b750487f 100644
 @@ -2033,7 +2033,7 @@ Execute como Administrador.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Não está a executar como root.
- 
+
  Execute com privilégios elevados: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_ro.ts b/src/i18n/rpi-imager_ro.ts
 index a939055d..93b19a01 100644
@@ -270,11 +213,11 @@ index a939055d..93b19a01 100644
 @@ -2032,7 +2032,7 @@ Te rog rulează ca Administrator.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Nu rulezi ca root.
- 
+
  Te rog rulează cu privilegii ridicate: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_ru.ts b/src/i18n/rpi-imager_ru.ts
 index e000725e..5601bae6 100644
@@ -283,11 +226,11 @@ index e000725e..5601bae6 100644
 @@ -2033,7 +2033,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Вы работаете не от имени пользователя root.
- 
+
  Пожалуйста, запустите программу с повышенными привилегиями: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_sk.ts b/src/i18n/rpi-imager_sk.ts
 index ebca2f40..98ed7291 100644
@@ -296,11 +239,11 @@ index ebca2f40..98ed7291 100644
 @@ -2033,7 +2033,7 @@ Prosím, spustite aplikáciu ako správca.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Nepracujete ako root.
- 
+
  Prosím, spustite aplikáciu s vyššími oprávneniami: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_sl.ts b/src/i18n/rpi-imager_sl.ts
 index 55f85ee5..6296eaf7 100644
@@ -309,7 +252,7 @@ index 55f85ee5..6296eaf7 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -322,11 +265,11 @@ index ec09844e..4f6a7473 100644
 @@ -2033,7 +2033,7 @@ Lütfen Yönetici olarak çalıştırın.</translation>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>Root olarak çalışmıyorsunuz.
- 
+
  Lütfen yüksek ayrıcalıklarla çalıştırın: sudo %1</translation>
 diff --git a/src/i18n/rpi-imager_uk.ts b/src/i18n/rpi-imager_uk.ts
 index d69458bc..9d47ddf6 100644
@@ -335,7 +278,7 @@ index d69458bc..9d47ddf6 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -348,7 +291,7 @@ index 37fe8336..68543bed 100644
 @@ -2030,7 +2030,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation type="unfinished"></translation>
@@ -361,11 +304,11 @@ index 093e7174..8c5e9c7d 100644
 @@ -2032,7 +2032,7 @@ Please run as Administrator.</source>
      <message>
          <source>You are not running as root.
- 
+
 -Please run with elevated privileges: sudo %1</source>
 +Please run with elevated privileges: sudo -i flatpak run org.raspberrypi.rpi-imager</source>
          <translation>你未以 root 身份运行。
- 
+
  请使用提升的权限运行：sudo %1</translation>
 diff --git a/src/main.cpp b/src/main.cpp
 index 76adcf75..bf7ade2e 100644

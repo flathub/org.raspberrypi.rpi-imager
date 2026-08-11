@@ -17,6 +17,7 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --system-talk-name=org.freedesktop.UDisks2
   - --system-talk-name=org.freedesktop.PolicyKit1
+  - --talk-name=org.freedesktop.Flatpak
 modules:
   - name: rpi-imager
     config-opts:
@@ -38,12 +39,18 @@ modules:
       - rm ${FLATPAK_DEST}/share/metainfo/*.metainfo.xml
       - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "../../${FLATPAK_ID}.metainfo.xml"
       - desktop-file-edit --set-key=Exec --set-value='/app/bin/start-rpi-imager %F' "${FLATPAK_DEST}/share/applications/org.raspberrypi.rpi-imager.desktop"
+      - install -Dm755 "../../host-exec-wrapper.sh" "${FLATPAK_DEST}/bin/host-exec-wrapper"
+      - ln -s /app/bin/host-exec-wrapper /app/bin/pkexec
+      - ln -s /app/bin/host-exec-wrapper /app/bin/gksu
+      - ln -s /app/bin/host-exec-wrapper /app/bin/gksudo
+      - ln -s /app/bin/host-exec-wrapper /app/bin/kdesu
+      - ln -s /app/bin/host-exec-wrapper /app/bin/kdesudo
       - install -Dm755 "../../start-rpi-imager.sh" "${FLATPAK_DEST}/bin/start-rpi-imager"
     sources:
       - type: git
         url: https://github.com/raspberrypi/rpi-imager.git
-        tag: v2.0.8
-        commit: de5469c257bc839e6377a323e460ec8208f2a137
+        tag: v2.0.10
+        commit: 467be3d3e88f5d83fa78c78788f6e6fdce61a47e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest
@@ -69,8 +76,8 @@ modules:
       # Pre-populate nghttp2 dependency
       - type: git
         url: https://github.com/nghttp2/nghttp2.git
-        #tag: v1.68.1 - force push to a depencency branch caused this to break.
-        commit: b7e422e2d0b053413849bfc45b1e31948e987660
+        tag: v1.70.0 # - force push to a depencency branch caused this to break.
+        #commit: 68cb6900fde14c77f0cd7add0e094a862960eb99
         dest: src/_deps/nghttp2-src
 
       # Pre-populate zlib dependency - use specific commit hash
@@ -118,6 +125,9 @@ modules:
         path: org.raspberrypi.rpi-imager.metainfo.xml
 
       - type: file
+        path: host-exec-wrapper.sh
+
+      - type: file
         path: start-rpi-imager.sh
 
       - type: patch
@@ -134,6 +144,9 @@ modules:
 
       - type: patch
         path: fix_zstd.patch
+
+      - type: patch
+        path: platform_quirks.patch
 
       - type: patch
         path: sudo_message.patch

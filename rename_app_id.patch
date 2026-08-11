@@ -8,17 +8,13 @@ index fc749cbc..6f9f4f55 100644
  debian/tmp
 -debian/com.raspberrypi.rpi-imager.metainfo.xml
 +debian/org.raspberrypi.rpi-imager.metainfo.xml
- 
+
  # macOS
  .DS_Store
 diff --git a/debian/com.raspberrypi.rpi-imager-cli.desktop b/debian/org.raspberrypi.rpi-imager-cli.desktop
 similarity index 100%
 rename from debian/com.raspberrypi.rpi-imager-cli.desktop
 rename to debian/org.raspberrypi.rpi-imager-cli.desktop
-diff --git a/debian/com.raspberrypi.rpi-imager-embedded.desktop b/debian/org.raspberrypi.rpi-imager-embedded.desktop
-similarity index 100%
-rename from debian/com.raspberrypi.rpi-imager-embedded.desktop
-rename to debian/org.raspberrypi.rpi-imager-embedded.desktop
 diff --git a/debian/com.raspberrypi.rpi-imager-manifest.xml b/debian/org.raspberrypi.rpi-imager-manifest.xml
 similarity index 100%
 rename from debian/com.raspberrypi.rpi-imager-manifest.xml
@@ -61,7 +57,7 @@ index fc80a4b8..c8f66633 100644
 @@ -7,7 +7,7 @@
    <vendor>Raspberry Pi Ltd</vendor>
    <vendor_url>https://www.raspberrypi.com/</vendor_url>
- 
+
 -  <action id="com.raspberrypi.rpi-imager.run">
 +  <action id="org.raspberrypi.rpi-imager.run">
      <description>Run Raspberry Pi Imager</description>
@@ -72,49 +68,37 @@ index 1c813ad1..8ca0b4ae 100755
 --- a/debian/rpi-imager-cli.install
 +++ b/debian/rpi-imager-cli.install
 @@ -6,4 +6,4 @@
- 
+
  src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
- 
+
 -debian/com.raspberrypi.rpi-imager-cli.desktop /usr/share/applications/
 +debian/org.raspberrypi.rpi-imager-cli.desktop /usr/share/applications/
-diff --git a/debian/rpi-imager-embedded.install b/debian/rpi-imager-embedded.install
-index f938a9ac..72e6544e 100755
---- a/debian/rpi-imager-embedded.install
-+++ b/debian/rpi-imager-embedded.install
-@@ -6,4 +6,4 @@ debian/embedded-imager.service        lib/systemd/system/
- 
- src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
- 
--debian/com.raspberrypi.rpi-imager-embedded.desktop /usr/share/applications/ 
-\ No newline at end of file
-+debian/org.raspberrypi.rpi-imager-embedded.desktop /usr/share/applications/ 
-\ No newline at end of file
 diff --git a/debian/rpi-imager.install b/debian/rpi-imager.install
 index e3cd2dde..80887173 100755
 --- a/debian/rpi-imager.install
 +++ b/debian/rpi-imager.install
 @@ -5,11 +5,11 @@
  [linux-arm64] rpi-imager-aarch64.AppImage => /usr/bin/rpi-imager
- 
+
  # Install PolicyKit policy for privilege escalation
 -debian/com.raspberrypi.rpi-imager.policy /usr/share/polkit-1/actions/
 +debian/org.raspberrypi.rpi-imager.policy /usr/share/polkit-1/actions/
- 
+
  src/linux/icon/rpi-imager.svg /usr/share/icons/hicolor/scalable/apps/
- 
+
 -debian/com.raspberrypi.rpi-imager.desktop /usr/share/applications/
 -debian/com.raspberrypi.rpi-imager.metainfo.xml /usr/share/metainfo/
 -debian/com.raspberrypi.rpi-imager-manifest.xml /usr/share/mime/packages/
 +debian/org.raspberrypi.rpi-imager.desktop /usr/share/applications/
 +debian/org.raspberrypi.rpi-imager.metainfo.xml /usr/share/metainfo/
 +debian/org.raspberrypi.rpi-imager-manifest.xml /usr/share/mime/packages/
- 
+
 diff --git a/src/linux/PlatformPackaging.cmake b/src/linux/PlatformPackaging.cmake
 index 53366d57..13b0ea62 100644
 --- a/src/linux/PlatformPackaging.cmake
 +++ b/src/linux/PlatformPackaging.cmake
 @@ -14,20 +14,20 @@ endif()
- 
+
  # Generate metainfo.xml at build time so version stays in sync with the binary
  add_custom_command(
 -    OUTPUT "${CMAKE_CURRENT_LIST_DIR}/../../debian/com.raspberrypi.rpi-imager.metainfo.xml"
@@ -138,7 +122,7 @@ index 53366d57..13b0ea62 100644
 +    DEPENDS "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml")
  add_dependencies(generate_metainfo generate_version)
  add_dependencies(${PROJECT_NAME} generate_metainfo)
- 
+
 @@ -37,12 +37,12 @@ if(BUILD_CLI_ONLY)
      # CLI-only build: install CLI-specific desktop file (marked as NoDisplay)
      # Icon is still required for AppImage tooling (linuxdeploy) even though NoDisplay=true
@@ -153,5 +137,5 @@ index 53366d57..13b0ea62 100644
 +    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.desktop" DESTINATION share/applications)
 +    install(FILES "${CMAKE_CURRENT_LIST_DIR}/../../debian/org.raspberrypi.rpi-imager.metainfo.xml" DESTINATION share/metainfo)
  endif()
- 
- 
+
+
