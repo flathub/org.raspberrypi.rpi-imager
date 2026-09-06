@@ -1,0 +1,9 @@
+diff --git a/src/_deps/nghttp2-src/CMakeLists.txt b/src/_deps/nghttp2-src/CMakeLists.txt
+--- a/src/_deps/nghttp2-src/CMakeLists.txt
++++ b/src/_deps/nghttp2-src/CMakeLists.txt
+@@ -480,4 +480,4 @@
+-include_directories(
++include_directories(BEFORE
+   "${CMAKE_CURRENT_BINARY_DIR}" # for config.h
+ )
+ # For use in src/CMakeLists.txt
