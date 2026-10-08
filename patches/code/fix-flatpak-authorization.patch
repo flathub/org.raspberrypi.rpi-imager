@@ -1,9 +1,10 @@
 --- a/src/linux/platformquirks_linux.cpp
 +++ b/src/linux/platformquirks_linux.cpp
-@@ -12,6 +12,7 @@
+@@ -12,7 +12,8 @@
   */
  
  #include "../platformquirks.h"
+ #include "../userfiles.h"
 +#include "flatpak-udisks2.h"
  #include <cstdlib>
  #include <unistd.h>
@@ -49,9 +50,7 @@
  
  #include <fcntl.h>
  #include <unistd.h>
-@@ -261,6 +262,12 @@
-   // is rejected. extraFlags (e.g. O_EXCL) are preserved across that fallback.
-   auto tryOpenWithFlags = [&](int extraFlags) -> FileError {
+@@ -272,1 +273,7 @@
      int flags = O_RDWR | extraFlags;
 +    if (isBlockDevice && FlatpakUDisks::active()) {
 +      // Open once through the host, buffered initially. Direct I/O can be
@@ -59,9 +58,6 @@
 +      using_direct_io_ = false;
 +      return OpenInternal(path.c_str(), flags);
 +    }
-     if (isBlockDevice) {
-       flags |= O_DIRECT;
-       using_direct_io_ = true;
 @@ -286,7 +293,7 @@
    // device), fall back to a shared open so the write still proceeds.
    FileError result = tryOpenWithFlags(isBlockDevice ? O_EXCL : 0);
@@ -102,20 +98,6 @@
    if (fd_ < 0) {
      last_error_code_ = errno;
      return FileError::kOpenError;
---- a/src/downloadthread.cpp
-+++ b/src/downloadthread.cpp
-@@ -384,7 +384,10 @@
-         QProcess::execute("open", args);
-         emit error(msg);
- #elif defined(Q_OS_LINUX)
--        emit error(tr("Cannot open storage device '%1'. Please run with elevated privileges (sudo).").arg(QString(_filename)));
-+        if (QFile::exists("/.flatpak-info"))
-+            emit error(tr("Cannot open storage device '%1'.").arg(QString(_filename)));
-+        else
-+            emit error(tr("Cannot open storage device '%1'. Please run with elevated privileges (sudo).").arg(QString(_filename)));
- #else
-         emit error(tr("Cannot open storage device '%1'.").arg(QString(_filename)));
- #endif
 --- /dev/null
 +++ b/src/linux/flatpak-udisks2.h
 @@ -0,0 +1,152 @@
