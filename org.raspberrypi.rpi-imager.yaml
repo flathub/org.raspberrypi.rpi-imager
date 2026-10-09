@@ -57,8 +57,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/raspberrypi/rpi-imager.git
-        tag: v2.0.11.1
-        commit: f259e1c99007b8a84b4e0049f03f0c34050f38e0
+        tag: v2.0.12
+        commit: 84b03d96cd4c390ebe475a4b5db5735e5535e9a6
         disable-submodules: true
         x-checker-data:
           type: git
