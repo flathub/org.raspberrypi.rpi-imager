@@ -39,12 +39,17 @@
        <caption>Write done</caption>
      </screenshot>
    </screenshots>
-@@ -55,7 +58,7 @@
+@@ -55,10 +58,11 @@
      <binary>rpi-imager</binary>
    </provides>
    <releases>
 -    <release version="@IMAGER_VERSION_STR@" />
-+    <release version="@IMAGER_RELEASE_VERSION@" date="@IMAGER_RELEASE_DATE@" />
++    <release version="@IMAGER_RELEASE_VERSION@" date="@IMAGER_RELEASE_DATE@">
++      <url type="details">https://github.com/raspberrypi/rpi-imager/releases/tag/v@IMAGER_RELEASE_VERSION@</url>
++    </release>
    </releases>
    <content_rating type="oars-1.1">
      <content_attribute id="social-info">moderate</content_attribute>
+   </content_rating>
+ </component>
+-
