@@ -253,3 +253,22 @@
 +}
 +
 +} // namespace FlatpakUDisks
+--- a/src/driveformatthread.cpp
++++ b/src/driveformatthread.cpp
+@@ -8,5 +8,8 @@
+ #include "disk_formatter.h"
+ #include "platformquirks.h"
++#ifdef Q_OS_LINUX
++#include "linux/flatpak-udisks2.h"
++#endif
+ #include <QDebug>
+ #include <QProcess>
+ #include <QTemporaryFile>
+@@ -61,6 +64,6 @@ void DriveFormatThread::run()
+ #ifdef Q_OS_LINUX
+     // Linux-specific: Check permissions
+-    if (::access(_device.constData(), W_OK) != 0)
++    if (!FlatpakUDisks::active() && ::access(_device.constData(), W_OK) != 0)
+     {
+         emit error(tr("Cannot format device: insufficient permissions. Please run with elevated privileges (sudo)."));
+         return;
